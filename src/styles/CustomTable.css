@@ -1,0 +1,48 @@
+/* src/styles/CustomTable.css */
+
+/* Contenedor principal para aumentar la especificidad */
+.table-container-custom {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Selector anidado: tiene más peso que ".table td" de Bootstrap */
+.table-container-custom .table tbody td {
+  padding: 6px 12px;
+  font-size: 13px;
+  vertical-align: middle;
+  height: 35px;
+  border-top: 1px solid #eee;
+}
+
+/* Estilo para los encabezados */
+.table-container-custom .table thead th {
+  background-color: #f8fafc;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: #64748b;
+  padding: 10px 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* Ajuste del buscador de bootstrap-table */
+.table-container-custom .fixed-table-toolbar .search input {
+  font-size: 12px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+/* Paginación */
+.table-container-custom .page-item .page-link {
+  font-size: 11px;
+  padding: 4px 10px;
+  color: #334155;
+}
+.table-container-custom .page-item.active .page-link {
+  background-color: #216fdb;
+  border-color: #216fdb;
+  color: #fff;
+}
