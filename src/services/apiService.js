@@ -1,12 +1,8 @@
-import apiClient from "../api/client";
+import apiClient from "../api/client"; // Asegúrate de usar el nombre correcto del archivo
 
 export const genericService = {
-  // Empleados (usará tu EmployeeResource)
   getEmployees: () => apiClient.get("/employees"),
-  // Sucursales
   getBranches: () => apiClient.get("/branches"),
-  // Empresas
-  getCompanies: () => apiClient.get("/companies"),
-  // Países
   getCountries: () => apiClient.get("/countries"),
+  // getCompanies eliminado porque ahora es un campo de texto en Branch
 };

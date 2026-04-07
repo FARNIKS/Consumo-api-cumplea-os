@@ -1,5 +1,7 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../api/client";
+import "../styles/Layout.css";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -15,28 +17,29 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="">
-      <nav className="">
-        <div className="">
-          <span className="">
-            {/* Icono Mundo Latinoamérica */}
+    <div className="layout-wrapper">
+      <nav className="navbar-custom">
+        <div className="navbar-container">
+          <span className="navbar-brand">
             <i className="bi bi-globe-americas me-2"></i>
-            <span>EL ORBE</span>
+            <span className="brand-text">EL ORBE</span>
           </span>
 
-          <div className="">
-            <button onClick={handleLogout} className="">
-              <i className=""></i>Salir
+          <div className="navbar-actions">
+            {/* type="button" evita comportamientos extraños de formularios */}
+            <button type="button" onClick={handleLogout} className="btn-logout">
+              <i className="bi bi-box-arrow-right me-2"></i>
+              Salir
             </button>
           </div>
         </div>
       </nav>
 
-      <main className="">{children}</main>
+      <main className="main-content">{children}</main>
 
-      <footer className="">
-        <div className="">
-          <p className="">
+      <footer className="footer-custom">
+        <div className="footer-container">
+          <p className="footer-text">
             © 2026 <strong>OBGROUP SYSTEM</strong> • Gestión Corporativa Global
           </p>
         </div>

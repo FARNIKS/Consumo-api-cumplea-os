@@ -1,48 +1,66 @@
-/* src/styles/CustomTable.css */
-
-/* Contenedor principal para aumentar la especificidad */
+/* --- Contenedor de la Tabla --- */
 .table-container-custom {
-  max-width: 1000px;
-  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
-/* Selector anidado: tiene más peso que ".table td" de Bootstrap */
-.table-container-custom .table tbody td {
-  padding: 6px 12px;
-  font-size: 13px;
-  vertical-align: middle;
-  height: 35px;
-  border-top: 1px solid #eee;
-}
-
-/* Estilo para los encabezados */
+/* --- Encabezados de Columna --- */
 .table-container-custom .table thead th {
   background-color: #f8fafc;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: #1e3a8a;
   font-weight: 700;
-  color: #64748b;
-  padding: 10px 12px;
-  border-bottom: 2px solid #e2e8f0;
-}
-
-/* Ajuste del buscador de bootstrap-table */
-.table-container-custom .fixed-table-toolbar .search input {
+  text-transform: uppercase;
   font-size: 12px;
-  height: 32px;
-  border-radius: 6px;
-  border: 1px solid #cbd5e1;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 12px;
 }
 
-/* Paginación */
-.table-container-custom .page-item .page-link {
-  font-size: 11px;
-  padding: 4px 10px;
-  color: #334155;
+/* --- Buscador (Input de Search) --- */
+.fixed-table-toolbar .search input {
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #f9fafb;
 }
-.table-container-custom .page-item.active .page-link {
-  background-color: #216fdb;
-  border-color: #216fdb;
-  color: #fff;
+
+/* --- Badges de Estado --- */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 85px;
+  text-align: center;
+}
+
+.status-active {
+  background-color: #10b981;
+  color: white;
+}
+.status-inactive {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* --- Texto de Carga --- */
+.custom-loading-text {
+  color: #1e3a8a;
+  font-weight: 600;
+  font-size: 14px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }

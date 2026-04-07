@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import apiClient from "../api/client";
+import "../styles/Login.css"; // Importación del CSS
 
 const Login = ({ onLoginSuccess }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -19,10 +20,7 @@ const Login = ({ onLoginSuccess }) => {
     setError(null);
 
     try {
-      // Petición a tu controlador AuthController@login
       const response = await apiClient.post("/login", credentials);
-
-      // La API devuelve: { access_token, token_type, user }
       onLoginSuccess(response.data);
     } catch (err) {
       console.error(err);
@@ -33,23 +31,23 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="">
-      <div
-        className=""
-        style={{ width: "100%", maxWidth: "400px", borderRadius: "15px" }}
-      >
-        <div className="">
-          <h2 className="">Bienvenido</h2>
-          <p className="">Ingresa al sistema de gestión</p>
+    <div className="login-page">
+      <div className="login-card">
+        <div className="login-header">
+          <div className="login-logo">
+            <i className="bi bi-globe-americas"> EL ORBE</i>
+          </div>
+          <h2 className="login-title">Bienvenido</h2>
+          <p className="login-subtitle">Ingresa al sistema de gestión</p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="">
-            <label className="">Correo Electrónico</label>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label className="form-label">Correo Electrónico</label>
             <input
               type="email"
               name="email"
-              className=""
+              className="form-input"
               placeholder="nombre@empresa.com"
               value={credentials.email}
               onChange={handleChange}
@@ -57,12 +55,12 @@ const Login = ({ onLoginSuccess }) => {
             />
           </div>
 
-          <div className="">
-            <label className="">Contraseña</label>
+          <div className="form-group">
+            <label className="form-label">Contraseña</label>
             <input
               type="password"
               name="password"
-              className=""
+              className="form-input"
               placeholder="••••••••"
               value={credentials.password}
               onChange={handleChange}
@@ -71,19 +69,27 @@ const Login = ({ onLoginSuccess }) => {
           </div>
 
           {error && (
-            <div className="" role="alert">
+            <div className="login-error" role="alert">
+              <i className="bi bi-exclamation-circle me-2"></i>
               {error}
             </div>
           )}
 
-          <button type="submit" className="" disabled={loading}>
+          <button type="submit" className="login-button" disabled={loading}>
             {loading ? (
-              <span className="" role="status"></span>
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+              ></span>
             ) : (
               "Iniciar Sesión"
             )}
           </button>
         </form>
+
+        <div className="login-footer">
+          <p>© 2026 EL ORBE Global Solutions</p>
+        </div>
       </div>
     </div>
   );

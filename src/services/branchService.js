@@ -1,33 +1,26 @@
-// src/services/branchService.js
-import apiClient from "../api/client"; // Cambiado a ../api/client
+import api from "../api/client"; // Usa el nombre del archivo real y el export default
 
 export const branchService = {
-  // Obtener todas las sucursales (Tu ruta en Laravel es /v1/branches)
-  getAll: () => apiClient.get("/branches"),
+  getAll: () => api.get("/branches"),
 
-  // Guardar nueva sucursal
-  store: (data) => apiClient.post("/branches", data),
+  // Asegúrate de que 'data' coincida con las reglas de tu Request en Laravel
+  store: (data) => api.post("/branches", data),
 
-  // Actualizar (usando el 'code' como PK)
-  update: (code, data) => apiClient.put(`/branches/${code}`, data),
+  // Para SQL Server, usamos el 'code' (ej: ATISa) como identificador en la URL
+  update: (code, data) => api.put(`/branches/${code}`, data),
 
-  // Desactivar (Tu controller usa el método destroy que cambia el estado a false)
-  delete: (code) => apiClient.delete(`/branches/${code}`),
+  delete: (code) => api.delete(`/branches/${code}`),
 
-  // Helper para cargar selects en el formulario (Trae países y empresas)
   getFormDependencies: async () => {
     try {
-      const [countries, companies] = await Promise.all([
-        apiClient.get("/countries"),
-        apiClient.get("/companies"),
-      ]);
+      const response = await api.get("/countries");
       return {
-        countries: countries.data.data, // Laravel Resource envuelve en 'data'
-        companies: companies.data.data,
+        countries: response.data.data || [],
+        companies: [],
       };
     } catch (error) {
-      console.error("Error cargando dependencias:", error);
-      return { countries: [], companies: [] };
+      console.error("Error en dependencias:", error);
+      return { countries: [] };
     }
   },
 };
