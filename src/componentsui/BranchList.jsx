@@ -21,16 +21,6 @@ const BranchList = () => {
         { field: "code", title: "Código", align: "center", sortable: true },
         { field: "company_name", title: "Empresa", sortable: true },
         { field: "country_name", title: "País", sortable: true },
-        {
-          field: "isActive",
-          title: "Estado",
-          align: "center",
-          formatter: (value) => {
-            const statusClass = value ? "status-active" : "status-inactive";
-            const statusText = value ? "ACTIVA" : "INACTIVA";
-            return `<span class="status-badge ${statusClass} shadow-sm">${statusText}</span>`;
-          },
-        },
       ],
       ajax: async (params) => {
         try {

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import apiClient from "../api/client";
-import "../styles/Login.css"; // Importación del CSS
+import "../styles/Login.css";
 
 const Login = ({ onLoginSuccess }) => {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  // Cambiamos 'email' por 'alias' para que coincida con el backend
+  const [credentials, setCredentials] = useState({ alias: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -20,11 +21,17 @@ const Login = ({ onLoginSuccess }) => {
     setError(null);
 
     try {
+      // Enviamos el objeto con { alias, password }
       const response = await apiClient.post("/login", credentials);
+
+      // Guardamos el token (según la lógica de tu interceptor)
+      localStorage.setItem("access_token", response.data.access_token);
+
       onLoginSuccess(response.data);
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Error al iniciar sesión");
+      // El backend devuelve el error en la propiedad 'error' según tu catch en PHP
+      setError(err.response?.data?.error || "Error al iniciar sesión");
     } finally {
       setLoading(false);
     }
@@ -38,18 +45,18 @@ const Login = ({ onLoginSuccess }) => {
             <i className="bi bi-globe-americas"> EL ORBE</i>
           </div>
           <h2 className="login-title">Bienvenido</h2>
-          <p className="login-subtitle">Ingresa al sistema de gestión</p>
+          <p className="login-subtitle">Ingresa con tu usuario corporativo</p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label className="form-label">Correo Electrónico</label>
+            <label className="form-label">Alias / Usuario</label>
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="alias" // Debe ser 'alias'
               className="form-input"
-              placeholder="nombre@empresa.com"
-              value={credentials.email}
+              placeholder="Ej: mjimenez"
+              value={credentials.alias}
               onChange={handleChange}
               required
             />
