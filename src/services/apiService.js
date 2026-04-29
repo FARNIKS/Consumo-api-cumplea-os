@@ -1,6 +1,14 @@
 import apiClient from "../api/client";
 
 export const genericService = {
+  getProfile: () => apiClient.get("/user"),
+
+  getUsers: () => apiClient.get("/users"),
+
+  registerUser: (data) => apiClient.post("/register", data),
+  updateUser: (id, data) => apiClient.patch(`/users/${id}`, data),
+  toggleUserStatus: (id) => apiClient.patch(`/users/status/${id}`),
+
   getEmployees: () => apiClient.get("/employees"),
   getBranches: () => apiClient.get("/branches"),
   getCountries: () => apiClient.get("/countries"),

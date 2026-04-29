@@ -16,13 +16,11 @@ function App() {
 
   return (
     <Routes>
-      {/* Ruta de Login - Le pasamos la prop que espera */}
       <Route
         path="/login"
         element={<Login onLoginSuccess={handleLoginSuccess} />}
       />
 
-      {/* Ruta de Inicio */}
       <Route
         path="/"
         element={
@@ -32,7 +30,6 @@ function App() {
         }
       />
 
-      {/* Ruta de Configuración de Correos */}
       <Route
         path="/settings"
         element={
@@ -42,7 +39,6 @@ function App() {
         }
       />
 
-      {/* Redirección por defecto si no encuentra la ruta */}
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   );
