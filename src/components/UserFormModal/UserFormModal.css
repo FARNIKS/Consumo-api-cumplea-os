@@ -1,0 +1,120 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content-custom {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 550px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  margin-bottom: 1.5rem;
+  color: #1e3a8a;
+  border-bottom: 2px solid #f8fafc;
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+/* --- Sistema de Grid para el Formulario --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  font-size: 0.85rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Secciones Especiales */
+.form-group-checkbox {
+  grid-column: span 2;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.password-section {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* Acciones del Modal */
+.modal-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-save,
+.btn-cancel {
+  padding: 0.7rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  min-width: 120px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-save {
+  background: #1e3a8a;
+  color: white;
+}
+.btn-cancel {
+  background: #f8fafc;
+  color: #475569;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .form-grid,
+  .password-section {
+    grid-template-columns: 1fr;
+  }
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+  .modal-actions {
+    flex-direction: column;
+  }
+  .btn-save,
+  .btn-cancel {
+    width: 100%;
+  }
+}

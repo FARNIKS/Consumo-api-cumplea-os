@@ -4,6 +4,7 @@ import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home";
 import Settings from "./pages/MailSettings";
 import Login from "./pages/Login";
+import UserPage from "./pages/UserPage"; // 1. Importamos la nueva página
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,11 +22,22 @@ function App() {
         element={<Login onLoginSuccess={handleLoginSuccess} />}
       />
 
+      {/* Ruta Home */}
       <Route
         path="/"
         element={
           <Layout user={user}>
             <Home />
+          </Layout>
+        }
+      />
+
+      {/* NUEVA: Ruta para Gestión de Usuarios */}
+      <Route
+        path="/users"
+        element={
+          <Layout user={user}>
+            <UserPage />
           </Layout>
         }
       />

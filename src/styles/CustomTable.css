@@ -1,9 +1,10 @@
-/* --- Contenedor de la Tabla --- */
+/* --- Contenedor Principal de la Tabla --- */
 .table-container-custom {
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave añadida */
   padding: 15px;
+  margin-top: 10px;
 }
 
 /* --- Encabezados de Columna --- */
@@ -15,13 +16,91 @@
   font-size: 12px;
   border-bottom: 2px solid #e2e8f0;
   padding: 12px;
+  vertical-align: middle;
 }
 
-/* --- Buscador (Input de Search) --- */
+/* --- Toolbar y Buscador (Bootstrap Table) --- */
 .fixed-table-toolbar .search input {
   border-radius: 8px;
   border: 1px solid #cbd5e1;
   padding: 6px 12px;
   font-size: 14px;
   background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.fixed-table-toolbar .search input:focus {
+  border-color: #1e3a8a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* --- Botón Editar (Acción en Fila) --- */
+.btn-edit-custom {
+  background-color: transparent;
+  color: #1e3a8a;
+  border: 1px solid #1e3a8a;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-edit-custom:hover {
+  background-color: #1e3a8a;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* --- SWITCH DE ESTADO (iOS Style) --- */
+.btn-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-round {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background-color: #cbd5e1;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider-round:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider-round {
+  background-color: #22c55e; /* Color de éxito (verde) */
+}
+
+input:checked + .slider-round:before {
+  transform: translateX(22px);
 }

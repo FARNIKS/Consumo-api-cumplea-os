@@ -31,6 +31,11 @@ const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
           {!collapsed && <span>Inicio</span>}
         </Link>
 
+        <Link to="/users" className="nav-item">
+          <Users size={22} />
+          {!collapsed && <span>Usuarios</span>}
+        </Link>
+
         <Link to="/settings" className="nav-item">
           <Mail size={22} />
           {!collapsed && <span>Configurar Correos</span>}
