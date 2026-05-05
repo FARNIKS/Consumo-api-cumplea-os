@@ -1,9 +1,7 @@
-/* Contenedor General */
 .dashboard-container {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Cabecera */
 .dashboard-header {
   margin-bottom: 1.5rem;
   border-left: 4px solid #1e3a8a;
@@ -23,7 +21,6 @@
   font-size: 0.95rem;
 }
 
-/* Tarjeta Principal con efecto de elevación */
 .dashboard-card {
   background: #ffffff;
   border-radius: 16px;
@@ -32,7 +29,6 @@
   overflow: hidden;
 }
 
-/* Contenedor de Pestañas */
 .tabs-container {
   background-color: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
@@ -47,7 +43,6 @@
   gap: 0.5rem;
 }
 
-/* Botones de las Pestañas */
 .tab-button {
   background: none;
   border: none;
@@ -68,7 +63,6 @@
   background-color: #f3f4f6;
 }
 
-/* Estado Activo de la Pestaña */
 .tab-button.active {
   color: #1e3a8a;
   background-color: #ffffff;
@@ -89,32 +83,6 @@
   border-radius: 10px 10px 0 0;
 }
 
-/* Animación de entrada */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Ajustes para móviles */
-@media (max-width: 600px) {
-  .nav-tabs-custom {
-    flex-direction: column;
-    padding-bottom: 0.5rem;
-  }
-
-  .tab-button {
-    border-radius: 8px;
-    border-bottom: 1px solid #e5e7eb;
-  }
-}
-
-/* Estilos para el formulario de configuración */
 .form-label {
   color: #1e3a8a;
   font-size: 0.9rem;
@@ -145,6 +113,30 @@
   gap: 10px;
   margin-bottom: 15px;
   animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 600px) {
+  .nav-tabs-custom {
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+  }
+
+  .tab-button {
+    border-radius: 8px;
+    border-bottom: 1px solid #e5e7eb;
+  }
 }
 
 @keyframes slideIn {

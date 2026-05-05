@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import apiClient from "../api/client";
-import "../styles/Login.css";
+import apiClient from "../../api/client";
+import "./Login.css";
 
 const Login = ({ onLoginSuccess }) => {
-  // Cambiamos 'email' por 'alias' para que coincida con el backend
   const [credentials, setCredentials] = useState({ alias: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,16 +20,14 @@ const Login = ({ onLoginSuccess }) => {
     setError(null);
 
     try {
-      // Enviamos el objeto con { alias, password }
       const response = await apiClient.post("/login", credentials);
 
-      // Guardamos el token (según la lógica de tu interceptor)
       localStorage.setItem("access_token", response.data.access_token);
 
       onLoginSuccess(response.data);
     } catch (err) {
       console.error(err);
-      // El backend devuelve el error en la propiedad 'error' según tu catch en PHP
+
       setError(err.response?.data?.error || "Error al iniciar sesión");
     } finally {
       setLoading(false);
@@ -53,7 +50,7 @@ const Login = ({ onLoginSuccess }) => {
             <label className="form-label">Alias / Usuario</label>
             <input
               type="text"
-              name="alias" // Debe ser 'alias'
+              name="alias"
               className="form-input"
               placeholder="Ej: usuario"
               value={credentials.alias}

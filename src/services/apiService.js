@@ -1,8 +1,10 @@
 import apiClient from "../api/client";
 
 export const genericService = {
-  // --- PERFIL Y SESIÓN ---
   getProfile: () => apiClient.get("/user"),
+
+  getMailStatus: () => apiClient.get("/settings/status"),
+  toggleMailPause: () => apiClient.post("/settings/toggle-pause"),
 
   getUsers: () => apiClient.get("/users"),
   registerUser: (data) => apiClient.post("/register", data),

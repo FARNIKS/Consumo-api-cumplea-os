@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import EmployeeList from "../componentsui/EmployeeList";
-import BranchList from "../componentsui/BranchList";
-import "../styles/Home.css";
+import EmployeeList from "./ui-components/EmployeeList";
+import BranchList from "./ui-components/BranchList";
+import "./Home.css";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("employees");

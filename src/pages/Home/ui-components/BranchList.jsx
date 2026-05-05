@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import $ from "jquery";
 import "bootstrap-table/dist/bootstrap-table.min.css";
 import "bootstrap-table/dist/bootstrap-table.min.js";
-import { genericService } from "../services/apiService";
-import "../styles/CustomTable.css";
+import { genericService } from "../../../services/apiService";
+import "../../../styles/CustomTable.css";
 
 const BranchList = () => {
   const tableRef = useRef(null);

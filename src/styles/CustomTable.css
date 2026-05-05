@@ -1,13 +1,11 @@
-/* --- Contenedor Principal de la Tabla --- */
 .table-container-custom {
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave añadida */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   padding: 15px;
   margin-top: 10px;
 }
 
-/* --- Encabezados de Columna --- */
 .table-container-custom .table thead th {
   background-color: #f8fafc;
   color: #1e3a8a;
@@ -19,7 +17,6 @@
   vertical-align: middle;
 }
 
-/* --- Toolbar y Buscador (Bootstrap Table) --- */
 .fixed-table-toolbar .search input {
   border-radius: 8px;
   border: 1px solid #cbd5e1;
@@ -35,7 +32,6 @@
   box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
 }
 
-/* --- Botón Editar (Acción en Fila) --- */
 .btn-edit-custom {
   background-color: transparent;
   color: #1e3a8a;
@@ -56,7 +52,6 @@
   transform: translateY(-1px);
 }
 
-/* --- SWITCH DE ESTADO (iOS Style) --- */
 .btn-status-container {
   display: flex;
   justify-content: center;
@@ -98,7 +93,7 @@
 }
 
 input:checked + .slider-round {
-  background-color: #22c55e; /* Color de éxito (verde) */
+  background-color: #22c55e;
 }
 
 input:checked + .slider-round:before {

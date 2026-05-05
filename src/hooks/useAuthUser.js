@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import apiClient from "../api/client";
 
-// Función para obtener Nombre y Apellido (ej: Miguel Jimenez)
 function getShortName(fullName) {
   if (!fullName || fullName === "Cargando...") return fullName;
   const parts = fullName.split(" ").filter(Boolean);
@@ -10,7 +9,6 @@ function getShortName(fullName) {
   return parts[0];
 }
 
-// Función para obtener iniciales del nombre corto (ej: Miguel Jimenez -> MJ)
 function getShortInitials(shortName) {
   if (!shortName || shortName === "Cargando...") return "??";
   return shortName

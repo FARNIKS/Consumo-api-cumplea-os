@@ -33,11 +33,50 @@
   border-radius: 4px;
 }
 
+.blade-img-placeholder {
+  background: #f3f4f6;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.blade-text-intro {
+  white-space: pre-line;
+}
+
+.birthday-main-body {
+  margin-top: 25px;
+}
+
+.birthday-main-body p {
+  white-space: pre-line;
+}
+
+.closing-text-preview {
+  white-space: pre-line;
+}
+
+.country-section {
+  margin: 20px 0;
+}
+
 .company-header {
   color: #0056b3;
   font-size: 1.2em;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
+}
+
+.employee-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.employee-item {
+  padding: 5px 0;
 }
 
 .birthday-phrase-box {
@@ -46,6 +85,11 @@
   padding: 20px;
   margin: 30px 0;
   font-style: italic;
+}
+
+.birthday-phrase-box p {
+  margin: 0;
+  color: #856404;
 }
 
 .no-birthday-phrase-box {
@@ -61,6 +105,10 @@
   color: #0056b3;
   display: block;
   margin-bottom: 10px;
+}
+
+.phrase-text-preview {
+  margin: 0;
 }
 
 .footer-preview {

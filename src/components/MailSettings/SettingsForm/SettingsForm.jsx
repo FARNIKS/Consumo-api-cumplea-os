@@ -7,10 +7,9 @@ const SettingsForm = ({
   onConfigChange,
   onSave,
   onReset,
-  isAdmin, // Nueva prop
+  isAdmin,
 }) => {
   const handleChange = (field, value) => {
-    // Si no es admin, no permitimos el cambio en el estado local
     if (!isAdmin) return;
     onConfigChange({ ...config, [field]: value });
   };
@@ -98,15 +97,8 @@ const SettingsForm = ({
         </div>
 
         {!isAdmin && (
-          <p
-            style={{
-              color: "#ff4d4f",
-              fontSize: "12px",
-              marginTop: "10px",
-              textAlign: "center",
-            }}
-          >
-            * Solo lectura: No tienes permisos para editar.
+          <p className="text-explain">
+            * Solo lectura: No tienes permisos para editar. *
           </p>
         )}
       </div>

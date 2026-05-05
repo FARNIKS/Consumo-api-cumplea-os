@@ -3,8 +3,8 @@ import $ from "jquery";
 import Swal from "sweetalert2";
 import "bootstrap-table/dist/bootstrap-table.min.css";
 import "bootstrap-table/dist/bootstrap-table.min.js";
-import { useUsers } from "../hooks/useUsers";
-import "../styles/CustomTable.css";
+import { useUsers } from "../../../hooks/useUsers";
+import "../../../styles/CustomTable.css";
 
 const UserList = ({ onEdit, refreshTrigger }) => {
   const tableRef = useRef(null);

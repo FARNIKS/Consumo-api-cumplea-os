@@ -1,4 +1,3 @@
-/* --- Estructura de la Página --- */
 .dashboard-container {
   animation: fadeIn 0.5s ease-in-out;
   padding: 1rem;
@@ -31,7 +30,6 @@
   overflow: hidden;
 }
 
-/* --- Botón "Nuevo Usuario" (Estilo Cápsula) --- */
 .tab-button-active {
   border-radius: 50px;
   padding: 8px 20px;

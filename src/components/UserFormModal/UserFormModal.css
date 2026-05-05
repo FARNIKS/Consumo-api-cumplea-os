@@ -26,7 +26,6 @@
   font-weight: 700;
 }
 
-/* --- Sistema de Grid para el Formulario --- */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -56,7 +55,6 @@
   font-size: 14px;
 }
 
-/* Secciones Especiales */
 .form-group-checkbox {
   grid-column: span 2;
   padding: 12px;
@@ -74,7 +72,6 @@
   border-top: 1px solid #f1f5f9;
 }
 
-/* Acciones del Modal */
 .modal-actions {
   margin-top: 2rem;
   display: flex;
@@ -101,7 +98,6 @@
   color: #475569;
 }
 
-/* Responsive */
 @media (max-width: 500px) {
   .form-grid,
   .password-section {

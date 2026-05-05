@@ -1,9 +1,10 @@
 import React from "react";
-import { useMailSettings } from "../hooks/useMailSettings";
-import SettingsForm from "../components/MailSettings/SettingsForm/SettingsForm";
-import MailPreview from "../components/MailSettings/MailPreview/MailPreview";
-import Swal from "sweetalert2"; // Importante para el mensaje
-import "../styles/MailSettings.css";
+import { useMailSettings } from "../../hooks/useMailSettings";
+import { useMailPause } from "../../hooks/useMailPause";
+import SettingsForm from "../../components/MailSettings/SettingsForm/SettingsForm";
+import MailPreview from "../../components/MailSettings/MailPreview/MailPreview";
+import Swal from "sweetalert2";
+import "./MailSettings.css";
 
 const MailSettings = () => {
   const {
@@ -16,11 +17,11 @@ const MailSettings = () => {
     handleReset,
   } = useMailSettings();
 
-  // Obtenemos el usuario para validar el rol
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const isAdmin = currentUser?.role === "admin";
 
-  // Función de guardado protegida
+  const { isPaused, handleTogglePause, loadingPause } = useMailPause(isAdmin);
+
   const protectedSave = () => {
     if (!isAdmin) {
       return Swal.fire({
@@ -33,20 +34,51 @@ const MailSettings = () => {
     handleUpdate();
   };
 
-  if (loading)
+  // Loading sencillo
+  if (loading) {
     return (
       <div className="loading-container">
         <div className="spinner"></div>
+        <p>Cargando configuración...</p>
       </div>
     );
+  }
 
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h2 className="dashboard-title">Configuración de Correos</h2>
-        <p className="dashboard-subtitle">
-          Personaliza los comunicados automáticos de OBGROUP
-        </p>
+        <div className="header-content-wrapper">
+          <div>
+            <h2 className="dashboard-title">Configuración de Correos</h2>
+            <p className="dashboard-subtitle">
+              Personaliza los comunicados automáticos de OBGROUP
+            </p>
+          </div>
+
+          <div
+            className={`status-control-card ${isPaused ? "is-paused" : "is-active"}`}
+          >
+            <div className="status-info">
+              <span className="status-dot"></span>
+              <span className="status-label">
+                {isPaused ? "Servicio Pausado" : "Servicio Activo"}
+              </span>
+            </div>
+            <button
+              onClick={handleTogglePause}
+              disabled={loadingPause}
+              className="status-toggle-button"
+            >
+              {loadingPause ? (
+                <div className="btn-spinner-dark"></div>
+              ) : isPaused ? (
+                "Reanudar"
+              ) : (
+                "Pausar"
+              )}
+            </button>
+          </div>
+        </div>
       </header>
 
       <div className="dashboard-card">
@@ -78,9 +110,9 @@ const MailSettings = () => {
                 activeTab={activeTab}
                 config={currentConfig}
                 onConfigChange={updateConfig}
-                onSave={protectedSave} // Usamos la versión protegida
+                onSave={protectedSave}
                 onReset={handleReset}
-                isAdmin={isAdmin} // Pasamos esto para bloquear los inputs
+                isAdmin={isAdmin}
               />
             </div>
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import Home from "./pages/Home";
-import Settings from "./pages/MailSettings";
-import Login from "./pages/Login";
-import UserPage from "./pages/UserPage"; // 1. Importamos la nueva página
+import Home from "./pages/Home/Home";
+import Settings from "./pages/MailSettings/MailSettings";
+import Login from "./pages/Login/Login";
+import UserPage from "./pages/UserPage/UserPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,7 +22,6 @@ function App() {
         element={<Login onLoginSuccess={handleLoginSuccess} />}
       />
 
-      {/* Ruta Home */}
       <Route
         path="/"
         element={
@@ -32,7 +31,6 @@ function App() {
         }
       />
 
-      {/* NUEVA: Ruta para Gestión de Usuarios */}
       <Route
         path="/users"
         element={

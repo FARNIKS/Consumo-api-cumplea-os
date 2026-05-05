@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
 
   const handleLogout = async () => {
     try {
-      // Primero limpiamos local para respuesta inmediata
       localStorage.removeItem("access_token");
       navigate("/login");
       await apiClient.post("/logout");

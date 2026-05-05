@@ -6,7 +6,6 @@ const MailPreview = ({ activeTab, config }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [prevUrl, setPrevUrl] = useState(config.banner_url);
 
-  // Sincronización de estado durante el renderizado para evitar errores de performance
   if (config.banner_url !== prevUrl) {
     setPrevUrl(config.banner_url);
     const isEmpty = !config.banner_url || config.banner_url.trim() === "";
@@ -17,11 +16,9 @@ const MailPreview = ({ activeTab, config }) => {
   useEffect(() => {
     if (!config.banner_url || config.banner_url.trim() === "") return;
 
-    // Debounce para evitar peticiones excesivas mientras el usuario escribe
     const timer = setTimeout(() => {
       const img = new Image();
 
-      // Timeout de 3 segundos para abortar si el servidor no responde
       const timeoutFallback = setTimeout(() => {
         img.src = "";
         setImageError(true);
@@ -53,7 +50,6 @@ const MailPreview = ({ activeTab, config }) => {
         <div className="email-content-wrapper">
           {activeTab === "birthday" ? (
             <>
-              {/* Manejo de estados de la imagen (Validando / Error / Renderizado) */}
               {isTyping ? (
                 <div className="blade-img-placeholder">
                   <span>🔍 Validando URL...</span>
@@ -71,12 +67,7 @@ const MailPreview = ({ activeTab, config }) => {
                 />
               )}
 
-              <p
-                className="blade-text-intro"
-                style={{ whiteSpace: "pre-line" }}
-              >
-                {config.intro_text}
-              </p>
+              <p className="blade-text-intro">{config.intro_text}</p>
 
               <div className="country-section">
                 <h3 className="company-header">📍 Costa Rica - EL ORBE:</h3>
@@ -85,34 +76,27 @@ const MailPreview = ({ activeTab, config }) => {
                 </ul>
               </div>
 
-              <div style={{ marginTop: "25px" }}>
-                <p style={{ whiteSpace: "pre-line" }}>{config.main_body}</p>
+              <div className="birthday-main-body">
+                <p>{config.main_body}</p>
                 <p>
                   <strong>{config.closing_text}</strong>
                 </p>
               </div>
 
               <div className="birthday-phrase-box">
-                <p style={{ margin: 0, color: "#856404" }}>
-                  "Frase célebre de ejemplo"
-                </p>
+                <p>"Frase célebre de ejemplo"</p>
               </div>
             </>
           ) : (
             <>
-              <p
-                className="blade-text-intro"
-                style={{ whiteSpace: "pre-line" }}
-              >
-                {config.intro_text}
-              </p>
+              <p className="blade-text-intro">{config.intro_text}</p>
               <div className="no-birthday-phrase-box">
                 <span className="phrase-title-preview">{config.main_body}</span>
                 <p className="phrase-text-preview">
                   "La persistencia es el camino al éxito."
                 </p>
               </div>
-              <p style={{ whiteSpace: "pre-line" }}>{config.closing_text}</p>
+              <p className="closing-text-preview">{config.closing_text}</p>
             </>
           )}
 
@@ -121,8 +105,7 @@ const MailPreview = ({ activeTab, config }) => {
               Atentamente,
               <br />
               <strong>{config.sign_off}</strong>
-              <br />
-              &copy; {new Date().getFullYear()} OBGROUP
+              <br />© {new Date().getFullYear()} OBGROUP
             </p>
           </div>
         </div>

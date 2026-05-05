@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import UserList from "../componentsui/UserList";
+import UserList from "./ui-components/UserList";
 import Swal from "sweetalert2";
-import UserFormModal from "../components/UserFormModal/UserFormModal";
-import "../styles/UserPage.css";
+import UserFormModal from "../../components/UserFormModal/UserFormModal";
+import "./UserPage.css";
 
 const UserPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // Obtenemos el usuario de la sesión
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const handleOpenModal = (user = null) => {
-    // Si no es admin, no permitimos abrir el modal de creación/edición
     if (currentUser?.role !== "admin") {
       return Swal.fire({
         icon: "error",
