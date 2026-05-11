@@ -1,0 +1,61 @@
+.btn-manual-send {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(30, 58, 138, 0.15);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-manual-send:hover(:disabled) {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+}
+
+.btn-manual-send:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-manual-send:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.spin {
+  display: inline-block;
+  animation: rotation 1s infinite linear;
+}
+
+.text-send-button {
+  margin-left: 10px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-manual-send i {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .btn-manual-send {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
+    order: 1;
+  }
+}

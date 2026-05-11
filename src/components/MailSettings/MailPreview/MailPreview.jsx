@@ -45,7 +45,7 @@ const MailPreview = ({ activeTab, config }) => {
 
   return (
     <section className="preview-column">
-      <div className="preview-label">Vista Previa (Diseño Blade)</div>
+      <div className="preview-label">Vista Previa</div>
       <div className="email-browser-frame">
         <div className="email-content-wrapper">
           {activeTab === "birthday" ? (
@@ -93,7 +93,7 @@ const MailPreview = ({ activeTab, config }) => {
               <div className="no-birthday-phrase-box">
                 <span className="phrase-title-preview">{config.main_body}</span>
                 <p className="phrase-text-preview">
-                  "La persistencia es el camino al éxito."
+                  "Frase célebre de ejemplo"
                 </p>
               </div>
               <p className="closing-text-preview">{config.closing_text}</p>

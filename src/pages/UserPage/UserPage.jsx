@@ -28,14 +28,7 @@ const UserPage = () => {
 
   return (
     <div className="dashboard-container">
-      <div
-        className="dashboard-header"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <div className="content-header">
         <div>
           <h2 className="dashboard-title">Gestión de Usuarios</h2>
           <p className="dashboard-subtitle">
@@ -44,13 +37,7 @@ const UserPage = () => {
         </div>
 
         <button
-          className="btn-edit-custom"
-          style={{
-            background: "#1e3a8a",
-            color: "white",
-            padding: "10px 20px",
-            borderRadius: "50px",
-          }}
+          className="btn-register-custom"
           onClick={() => handleOpenModal()}
         >
           <i className="bi bi-person-plus me-2"></i> Nuevo Usuario

@@ -5,6 +5,7 @@ export const genericService = {
 
   getMailStatus: () => apiClient.get("/settings/status"),
   toggleMailPause: () => apiClient.post("/settings/toggle-pause"),
+  runManualBirthdaySend: () => apiClient.post("/settings/run-manual-send"),
 
   getUsers: () => apiClient.get("/users"),
   registerUser: (data) => apiClient.post("/register", data),

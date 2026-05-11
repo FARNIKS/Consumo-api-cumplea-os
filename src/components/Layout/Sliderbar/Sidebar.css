@@ -127,7 +127,7 @@
 }
 
 .role-admin {
-  color: #fbbf24; 
+  color: #fbbf24;
 }
 
 .role-user {
@@ -161,4 +161,21 @@
 
 .btn-logout-sidebar:hover {
   background-color: rgba(248, 113, 113, 0.1);
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar span,
+  .sidebar .user-info,
+  .sidebar .brand {
+    display: none !important;
+  }
+
+  .nav-item,
+  .btn-logout-sidebar {
+    justify-content: center;
+    padding: 12px 0;
+  }
 }

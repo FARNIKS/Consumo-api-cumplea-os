@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import $ from "jquery";
 import "bootstrap-table/dist/bootstrap-table.min.css";
 import "bootstrap-table/dist/bootstrap-table.min.js";
+import "bootstrap-table/dist/bootstrap-table-locale-all.js";
 import { genericService } from "../../../services/apiService";
 import "../../../styles/CustomTable.css";
 
@@ -12,6 +13,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const $el = $(tableRef.current);
     $el.bootstrapTable({
+      locale: "es-ES",
       search: true,
       pagination: true,
       classes: "table table-striped table-hover",

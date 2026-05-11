@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react"; // Importante: añade useEffect
 import { Link } from "react-router-dom";
-import { House, Mail, LogOut, Menu, ChevronLeft, Users } from "lucide-react"; // 1. Importamos Users
+import { House, Mail, LogOut, Menu, ChevronLeft, Users } from "lucide-react";
 import { useAuthUser } from "../../../hooks/useAuthUser.js";
 import "./Sidebar.css";
 
 const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
   const user = useAuthUser();
+  const isAdmin = user?.role === "admin";
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setCollapsed(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [setCollapsed]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -17,7 +32,7 @@ const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
       <div className="sidebar-header">
         {!collapsed && (
           <span className="brand">
-            <i className="bi bi-globe-americas"> EL ORBE</i>
+            <i className="bi bi-globe-americas"> OBGROUP</i>
           </span>
         )}
         <button onClick={() => setCollapsed(!collapsed)} className="toggle-btn">
@@ -31,23 +46,27 @@ const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
           {!collapsed && <span>Inicio</span>}
         </Link>
 
-        <Link to="/users" className="nav-item">
-          <Users size={22} />
-          {!collapsed && <span>Usuarios</span>}
-        </Link>
+        {isAdmin && (
+          <>
+            <Link to="/users" className="nav-item">
+              <Users size={22} />
+              {!collapsed && <span>Usuarios</span>}
+            </Link>
 
-        <Link to="/settings" className="nav-item">
-          <Mail size={22} />
-          {!collapsed && <span>Configurar Correos</span>}
-        </Link>
+            <Link to="/settings" className="nav-item">
+              <Mail size={22} />
+              {!collapsed && <span>Configurar Correos</span>}
+            </Link>
+          </>
+        )}
       </nav>
 
       <div className="sidebar-user">
         <div className="user-badge">
-          <div className="avatar">{user.initials}</div>
+          <div className="avatar">{user?.initials || "U"}</div>
           {!collapsed && (
             <div className="user-info">
-              <span className="user-name">{user.name}</span>
+              <span className="user-name">{user?.name}</span>
               <span className={`user-role role-${user?.role || "user"}`}>
                 {(user?.role || "user").toUpperCase()}
               </span>

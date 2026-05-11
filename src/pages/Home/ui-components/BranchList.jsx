@@ -11,6 +11,7 @@ const BranchList = () => {
   useEffect(() => {
     const $el = $(tableRef.current);
     $el.bootstrapTable({
+      locale: "es-ES",
       search: true,
       pagination: true,
       classes: "table table-striped table-hover",

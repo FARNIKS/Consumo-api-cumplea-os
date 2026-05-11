@@ -3,6 +3,7 @@ import { useMailSettings } from "../../hooks/useMailSettings";
 import { useMailPause } from "../../hooks/useMailPause";
 import SettingsForm from "../../components/MailSettings/SettingsForm/SettingsForm";
 import MailPreview from "../../components/MailSettings/MailPreview/MailPreview";
+import ManualSendButton from "../../components/ManualSendButton/ManualSendButton";
 import Swal from "sweetalert2";
 import "./MailSettings.css";
 
@@ -23,18 +24,9 @@ const MailSettings = () => {
   const { isPaused, handleTogglePause, loadingPause } = useMailPause(isAdmin);
 
   const protectedSave = () => {
-    if (!isAdmin) {
-      return Swal.fire({
-        icon: "error",
-        title: "Acceso Denegado",
-        text: "Solo los administradores pueden modificar la configuración de correos.",
-        confirmButtonColor: "#1e3a8a",
-      });
-    }
     handleUpdate();
   };
 
-  // Loading sencillo
   if (loading) {
     return (
       <div className="loading-container">
@@ -55,28 +47,32 @@ const MailSettings = () => {
             </p>
           </div>
 
-          <div
-            className={`status-control-card ${isPaused ? "is-paused" : "is-active"}`}
-          >
-            <div className="status-info">
-              <span className="status-dot"></span>
-              <span className="status-label">
-                {isPaused ? "Servicio Pausado" : "Servicio Activo"}
-              </span>
-            </div>
-            <button
-              onClick={handleTogglePause}
-              disabled={loadingPause}
-              className="status-toggle-button"
+          <div className="header-actions-group">
+            {isAdmin && <ManualSendButton />}
+
+            <div
+              className={`status-control-card ${isPaused ? "is-paused" : "is-active"}`}
             >
-              {loadingPause ? (
-                <div className="btn-spinner-dark"></div>
-              ) : isPaused ? (
-                "Reanudar"
-              ) : (
-                "Pausar"
-              )}
-            </button>
+              <div className="status-info">
+                <span className="status-dot"></span>
+                <span className="status-label">
+                  {isPaused ? "Servicio Pausado" : "Servicio Activo"}
+                </span>
+              </div>
+              <button
+                onClick={handleTogglePause}
+                disabled={loadingPause}
+                className="status-toggle-button"
+              >
+                {loadingPause ? (
+                  <div className="btn-spinner-dark"></div>
+                ) : isPaused ? (
+                  <i className="bi bi-play-circle-fill" title="Reanudar"></i>
+                ) : (
+                  <i className="bi bi-pause-circle-fill" title="Pausar"></i>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>

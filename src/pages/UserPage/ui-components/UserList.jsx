@@ -3,8 +3,11 @@ import $ from "jquery";
 import Swal from "sweetalert2";
 import "bootstrap-table/dist/bootstrap-table.min.css";
 import "bootstrap-table/dist/bootstrap-table.min.js";
+import "bootstrap-table/dist/bootstrap-table-locale-all.js";
+
 import { useUsers } from "../../../hooks/useUsers";
 import "../../../styles/CustomTable.css";
+import "./UserList.css";
 
 const UserList = ({ onEdit, refreshTrigger }) => {
   const tableRef = useRef(null);
@@ -23,36 +26,7 @@ const UserList = ({ onEdit, refreshTrigger }) => {
 
     window.actionEvents = {
       "click .switch-input": async function (e, value, row) {
-        // Detenemos el cambio visual del checkbox inmediatamente
-        e.preventDefault();
-
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        const currentUserId = storedUser?.id;
-        const currentUserRole = storedUser?.role;
-
-        // 1. VALIDACIÓN: Solo administradores pueden usar el toggle
-        if (currentUserRole !== "admin") {
-          Swal.fire({
-            icon: "error",
-            title: "Acceso Denegado",
-            text: "No tienes permisos de administrador para cambiar el estado.",
-            confirmButtonColor: "#1e3a8a",
-          });
-          refreshTable(); // Forzar render para resetear el switch visual
-          return;
-        }
-
-        // 2. VALIDACIÓN: No desactivarse a sí mismo
-        if (row.id == currentUserId) {
-          Swal.fire({
-            icon: "error",
-            title: "Operación no permitida",
-            text: "No puedes desactivar tu propia cuenta mientras estás en sesión.",
-            confirmButtonColor: "#1e3a8a",
-          });
-          refreshTable();
-          return;
-        }
+        e.preventDefault(); // Evita el cambio visual inmediato
 
         const action = row.is_active == 1 ? "desactivar" : "activar";
 
@@ -79,32 +53,39 @@ const UserList = ({ onEdit, refreshTrigger }) => {
             });
           } catch (error) {
             const status = error.response?.status;
-            let errorTitle = "Error";
-            let serverMsg = error.response?.data?.message || "Error de red.";
 
             if (status === 403) {
-              errorTitle = "Acceso Denegado";
-              serverMsg = "No tienes permisos de administrador en el servidor.";
+              // Esta es la validación importante que viene del servidor
+              Swal.fire({
+                icon: "error",
+                title: "Acción bloqueada",
+                text: "No puedes desactivar tu propia cuenta.",
+                confirmButtonColor: "#1e3a8a",
+              });
+            } else {
+              Swal.fire("Error", "No se pudo procesar la solicitud.", "error");
             }
-
-            Swal.fire(errorTitle, serverMsg, "error");
           } finally {
             refreshTable();
           }
         } else {
-          refreshTable(); // Resetear visualmente si cancela
+          refreshTable();
         }
       },
 
       "click .btn-edit": (e, value, row) => {
-        onEdit(row); // La validación de rol ya la hace UserPage en handleOpenModal
+        onEdit(row);
       },
     };
 
     $el.bootstrapTable({
+      locale: "es-ES",
       search: true,
       pagination: true,
       classes: "table table-striped table-hover",
+      showLoading: true,
+      formatLoadingMessage: () =>
+        '<span class="custom-loading-text">Consultando empleados...</span>',
       columns: [
         { field: "name", title: "Nombre Completo", sortable: true },
         { field: "email", title: "Email", sortable: true },

@@ -5,7 +5,8 @@ const Footer = () => {
   return (
     <footer className="main-footer">
       <p className="text-footer">
-        © 2026 <strong>OBGROUP SYSTEM</strong> • Gestión Corporativa Global
+        © {new Date().getFullYear()} <strong>OBGROUP SYSTEM</strong> • Gestión
+        Corporativa Global
       </p>
     </footer>
   );

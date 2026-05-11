@@ -6,6 +6,7 @@ const Login = ({ onLoginSuccess }) => {
   const [credentials, setCredentials] = useState({ alias: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({
@@ -39,7 +40,7 @@ const Login = ({ onLoginSuccess }) => {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
-            <i className="bi bi-globe-americas"> EL ORBE</i>
+            <i className="bi bi-globe-americas"> OBGROUP</i>
           </div>
           <h2 className="login-title">Bienvenido</h2>
           <p className="login-subtitle">Ingresa con tu usuario corporativo</p>
@@ -61,24 +62,34 @@ const Login = ({ onLoginSuccess }) => {
 
           <div className="form-group">
             <label className="form-label">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              className="form-input"
-              placeholder="••••••••"
-              value={credentials.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                className="form-input"
+                placeholder="••••••••"
+                value={credentials.password}
+                onChange={handleChange}
+                required
+              />
 
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                <i
+                  className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}
+                ></i>
+              </button>
+            </div>
+          </div>
           {error && (
             <div className="login-error" role="alert">
               <i className="bi bi-exclamation-circle me-2"></i>
               {error}
             </div>
           )}
-
           <button type="submit" className="login-button" disabled={loading}>
             {loading ? (
               <span
@@ -92,7 +103,7 @@ const Login = ({ onLoginSuccess }) => {
         </form>
 
         <div className="login-footer">
-          <p>© 2026 EL ORBE</p>
+          <p>© {new Date().getFullYear()} OBGROUP</p>
         </div>
       </div>
     </div>
