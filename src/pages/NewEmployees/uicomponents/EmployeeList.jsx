@@ -1,54 +1,46 @@
 import React from "react";
 import CustomBootstrapTable from "../../../components/CustomBootstrapTable/CustomBootstrapTable";
 
-const EmployeeList = ({ employees, onEdit, isLoading }) => {
-  // 1. Definimos los eventos dentro del componente para mantener el scope de React
-  const actionEvents = {
-    "click .btn-edit": (e, val, row) => {
-      e.preventDefault();
-      onEdit(row); // <--- Esto envía TODO el objeto del empleado (con sede y departamento) al padre
-    },
-  };
+const columns = [
+  { field: "nombre", title: "Nombre", sortable: true },
+  {
+    field: "departamento",
+    title: "Departamento",
+    align: "center",
+    sortable: true,
+  },
+  {
+    field: "empresa.codigo",
+    title: "Código",
+    sortable: true,
+    align: "center",
+  },
+  {
+    field: "empresa.nombre",
+    title: "Empresa",
+    sortable: true,
+    align: "center",
+  },
+  {
+    field: "empresa.pais",
+    title: "País",
+    sortable: true,
+    align: "center",
+  },
+  {
+    field: "fecha_ingreso",
+    title: "fecha de ingreso",
+    sortable: true,
+    align: "center",
+  },
+];
 
-  // 2. Trasladamos la configuración de columnas aquí adentro para poder inyectarle 'events'
-  const columns = [
-    { field: "nombre", title: "Nombre", sortable: true },
-    { field: "departamento", title: "Departamento" },
-    {
-      field: "empresa.codigo",
-      title: "Código",
-      align: "center",
-    },
-    {
-      field: "empresa.nombre",
-      title: "Empresa",
-      align: "center",
-    },
-    {
-      field: "empresa.pais",
-      title: "País",
-      align: "center",
-    },
-    {
-      field: "creado_el",
-      title: "Creado el",
-      align: "center",
-    },
-    {
-      title: "Acciones",
-      align: "center",
-      events: actionEvents,
-      formatter: () =>
-        `<button class="btn-edit-custom btn-edit"><i class="bi bi-pencil-fill me-1"></i>Editar</button>`,
-    },
-  ];
-
+const EmployeeList = ({ employees, isLoading }) => {
   return (
     <CustomBootstrapTable
       columns={columns}
       data={employees}
       loadingMessage="Consultando empleados..."
-      actionEvents={actionEvents}
       isLoading={isLoading}
     />
   );

@@ -44,12 +44,9 @@
   border-color: #1e3a8a;
 }
 
-/* ==========================================================================
-   CONTENEDOR DE ACCIONES RESPONSIVO (FLEXBOX FLUIDO)
-   ========================================================================== */
 .form-actions {
   display: flex;
-  flex-direction: row; /* Por defecto van alineados horizontalmente */
+  flex-direction: row;
   justify-content: flex-end;
   gap: 12px;
   margin-top: 24px;
@@ -57,7 +54,7 @@
 }
 
 .btn-save-config {
-  width: auto; /* Evita que ocupe todo el ancho en pantallas grandes */
+  width: auto;
   padding: 10px 20px;
   background-color: #1e3a8a;
   color: #ffffff;
@@ -75,7 +72,7 @@
 }
 
 .btn-reset-config {
-  width: auto; /* Mantiene su tamaño basado en su propio padding */
+  width: auto;
   padding: 10px 16px;
   background-color: transparent;
   color: #64748b;
@@ -94,18 +91,15 @@
   color: #ffffff;
 }
 
-/* ==========================================================================
-   MEDIA QUERY: Comportamiento idéntico ante reducciones críticas
-   ========================================================================== */
 @media (max-width: 600px) {
   .form-actions {
-    flex-direction: column-reverse; /* El botón principal queda arriba al apilarse */
+    flex-direction: column-reverse;
     gap: 10px;
   }
 
   .btn-save-config,
   .btn-reset-config {
-    width: 100%; /* Solo se expanden al 100% cuando la pantalla es puramente móvil */
+    width: 100%;
     padding: 12px;
     font-size: 0.9rem;
     text-align: center;

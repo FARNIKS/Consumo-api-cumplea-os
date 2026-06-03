@@ -51,7 +51,7 @@ const NewEmployeeMailSettings = () => {
 
   const handleUpdateAndRefresh = async () => {
     await handleUpdate();
-    fetchCount(); // Refresca tras guardar
+    fetchCount();
   };
 
   const handleManualSendWithCheck = async () => {

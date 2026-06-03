@@ -112,25 +112,22 @@
   font-size: 0.75rem;
   color: #9ca3af;
 }
-/* Contenedor relativo para posicionar el botón dentro */
 .password-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-/* Ajuste al input para que el texto no choque con el icono */
 .password-wrapper .form-input {
   padding-right: 45px;
 }
 
-/* Estilo del botón del ojo */
 .password-toggle {
   position: absolute;
   right: 12px;
   background: none;
   border: none;
-  color: #6b7280; /* Color gris suave como tus placeholders */
+  color: #6b7280;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -140,7 +137,7 @@
 }
 
 .password-toggle:hover {
-  color: #3b82f6; /* Azul cuando pasas el mouse */
+  color: #3b82f6;
 }
 
 .password-toggle:focus {

@@ -48,7 +48,6 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
     }, 0);
   }, [currentUrl]);
 
-  // Si no hay datos de configuración cargados aún, prevenir errores de lectura
   if (!config) {
     return (
       <p style={{ padding: "20px", color: "#64748b" }}>
@@ -63,10 +62,8 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
 
       <div className="mail-body-preview-container">
         <div className="mail-preview-card">
-          {/* ================= PESTAÑA: LUNES (GENERAL MASIVO) ================= */}
           {activeTab === "general" && (
             <>
-              {/* Bloque Seguro de Control del Banner */}
               {isTyping ? (
                 <div className="mail-preview-banner-placeholder">
                   <span>🔍 Validando URL del banner corporativo...</span>
@@ -95,7 +92,6 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
                   </p>
                 </div>
 
-                {/* Fila de ejemplo simulando datos dinámicos */}
                 <div className="mail-preview-country-section">
                   <div className="mail-preview-company-group">
                     <h3 className="mail-preview-company-header">
@@ -128,7 +124,6 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
             </>
           )}
 
-          {/* ================= PESTAÑA: VIERNES (CON INGRESOS RH) ================= */}
           {activeTab === "friday-with" && (
             <>
               <div className="mail-preview-header-gradient">
@@ -149,7 +144,6 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
                   </div>
                 </div>
 
-                {/* Renderizado de Estructura de Ingresos simulados */}
                 <div className="mail-preview-company-group">
                   <div className="mail-preview-employee-item">
                     <span className="mail-preview-count-pill">1 INGRESO</span>
@@ -177,7 +171,6 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
             </>
           )}
 
-          {/* ================= PESTAÑA: VIERNES (SIN INGRESOS RH) ================= */}
           {activeTab === "friday-no" && (
             <>
               <div className="mail-preview-header-gradient">
@@ -214,7 +207,6 @@ const NewEmployeeMailPreview = ({ activeTab, config }) => {
             </>
           )}
 
-          {/* ================= PIE DE PÁGINA CORPORATIVO COMÚN ================= */}
           <div className="mail-preview-footer">
             {activeTab === "general" ? (
               <p className="mail-preview-footer-text">

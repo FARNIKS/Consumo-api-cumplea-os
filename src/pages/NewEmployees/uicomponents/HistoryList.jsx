@@ -2,11 +2,19 @@ import React from "react";
 import CustomBootstrapTable from "../../../components/CustomBootstrapTable/CustomBootstrapTable";
 
 const COLUMNS_CONFIG = [
-  { field: "nombre", title: "Nombre" },
-  { field: "departamento", title: "Depto" },
+  { field: "nombre", title: "Nombre", sortable: true },
+  { field: "cedula", title: "Cedula", sortable: true, align: "center" },
+  { field: "departamento", title: "Depto", sortable: true, align: "center" },
   {
-    field: "empresa.nombre",
+    field: "empresa.codigo",
     title: "Empresa",
+    sortable: true,
+    align: "center",
+  },
+  {
+    field: "fecha_ingreso",
+    title: "fecha de ingreso",
+    sortable: true,
     align: "center",
   },
   {

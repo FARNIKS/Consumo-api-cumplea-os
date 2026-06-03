@@ -3,10 +3,6 @@ import apiClient from "../api/client";
 export const genericService = {
   getProfile: () => apiClient.get("/user"),
 
-  getMailStatus: () => apiClient.get("/settings/status"),
-  toggleMailPause: () => apiClient.post("/settings/toggle-pause"),
-  runManualBirthdaySend: () => apiClient.post("/settings/run-manual-send"),
-
   getUsers: () => apiClient.get("/users"),
   registerUser: (data) => apiClient.post("/register", data),
   updateUser: (id, data) => apiClient.patch(`/users/${id}`, data),
@@ -15,6 +11,16 @@ export const genericService = {
   getEmployees: () => apiClient.get("/employees"),
   getBranches: () => apiClient.get("/branches"),
   getCountries: () => apiClient.get("/countries"),
+  getDepartments: () => apiClient.get("departments"),
+
+  getNewEmployees: () => apiClient.get("/new-employees"),
+  getNewEmployeesCount: () => apiClient.get("/new-employees/count"),
+  getHistoryEmployees: () => apiClient.get("/history-employees"),
+  syncNewEmployeesNow: () => apiClient.post("/new-employees/sync"),
+
+  getMailStatus: () => apiClient.get("/settings/status"),
+  toggleMailPause: () => apiClient.post("/settings/toggle-pause"),
+  runManualBirthdaySend: () => apiClient.post("/settings/run-manual-send"),
 
   getBirthdayConfig: () => apiClient.get("/settings/birthday"),
   updateBirthdayConfig: (data) => apiClient.put("/settings/birthday", data),
@@ -60,12 +66,4 @@ export const genericService = {
     apiClient.put("/settings/no-new-employee-report-rh", data),
   restoreNoNewEmployeeReportRhConfig: () =>
     apiClient.post("/settings/no-new-employee-report-rh/restore"),
-
-  getDepartments: () => apiClient.get("/employees/departments"),
-  getNewEmployees: () => apiClient.get("/new-employees"),
-  getNewEmployeesCount: () => apiClient.get("/new-employees/count"),
-
-  createNewEmployee: (data) => apiClient.post("/new-employees", data),
-  updateNewEmployee: (id, data) => apiClient.put(`/new-employees/${id}`, data),
-  getHistoryEmployees: () => apiClient.get("/history-employees"),
 };

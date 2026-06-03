@@ -53,11 +53,7 @@ const CustomBootstrapTable = ({
 
     $el.bootstrapTable(tableOptions);
 
-    if (data && data.length > 0) {
-      $el.bootstrapTable("load", data);
-    }
-
-    if (isLoading) {
+    if (isLoading || ajaxMethod) {
       $el.bootstrapTable("showLoading");
     }
 
@@ -68,7 +64,6 @@ const CustomBootstrapTable = ({
     };
   }, []);
 
-  // Efecto para escuchar cambios en el estado de carga (Spinner)
   useEffect(() => {
     if (tableRef.current) {
       const $el = $(tableRef.current);
@@ -83,16 +78,24 @@ const CustomBootstrapTable = ({
   }, [isLoading]);
 
   useEffect(() => {
-    if (data && tableRef.current) {
+    if (tableRef.current) {
       const $el = $(tableRef.current);
       if ($el.data("bootstrap.table")) {
-        $el.bootstrapTable("load", data);
+        $el.bootstrapTable("load", data || []);
+
+        if (data && !isLoading) {
+          $el.bootstrapTable("hideLoading");
+        }
       }
     }
-  }, [data]);
+  }, [data, isLoading]);
 
   useEffect(() => {
-    if (tableRef.current) {
+    if (
+      refreshTrigger !== null &&
+      refreshTrigger !== undefined &&
+      tableRef.current
+    ) {
       const $el = $(tableRef.current);
       if ($el.data("bootstrap.table")) {
         $el.bootstrapTable("refresh");

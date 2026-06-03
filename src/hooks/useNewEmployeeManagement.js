@@ -5,54 +5,71 @@ export const useNewEmployeeManagement = () => {
   const [employees, setEmployees] = useState([]);
   const [history, setHistory] = useState([]);
   const [branches, setBranches] = useState([]);
-  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [syncing, setSyncing] = useState(false);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const [empRes, histRes, branchRes, deptRes] = await Promise.allSettled([
+      const [empRes, histRes, branchRes] = await Promise.allSettled([
         genericService.getNewEmployees(),
         genericService.getHistoryEmployees(),
         genericService.getBranches(),
-        genericService.getDepartments(),
       ]);
 
-      setEmployees(
-        empRes.status === "fulfilled" ? empRes.value.data.data || [] : [],
-      );
-      setHistory(
-        histRes.status === "fulfilled" ? histRes.value.data.data || [] : [],
-      );
-      setBranches(
-        branchRes.status === "fulfilled" ? branchRes.value.data.data || [] : [],
-      );
+      if (empRes.status === "fulfilled") {
+        const empData = empRes.value?.data?.data || empRes.value?.data || [];
+        setEmployees(Array.isArray(empData) ? empData : []);
+      }
 
-      const depts =
-        deptRes.status === "fulfilled"
-          ? deptRes.value.data.data || deptRes.value.data || []
-          : [];
-      setDepartments(Array.isArray(depts) ? depts : []);
+      if (histRes.status === "fulfilled") {
+        const histData = histRes.value?.data?.data || histRes.value?.data || [];
+        setHistory(Array.isArray(histData) ? histData : []);
+      }
+
+      if (branchRes.status === "fulfilled") {
+        const branchData =
+          branchRes.value?.data?.data || branchRes.value?.data || [];
+        setBranches(Array.isArray(branchData) ? branchData : []);
+      }
     } catch (error) {
-      console.error("Error al obtener datos:", error);
+      console.error("Error crítico en el hook:", error);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  const saveEmployee = async (data, id = null) => {
-    return id
-      ? await genericService.updateNewEmployee(id, data)
-      : await genericService.createNewEmployee(data);
+  const syncEmployees = async () => {
+    setSyncing(true);
+    try {
+      const response = await genericService.syncNewEmployeesNow();
+      const status = response.data?.status;
+      const message = response.data?.message;
+      const output = response.data?.output || "";
+
+      if (status === "success") {
+        await fetchData();
+        return { success: true, message, output };
+      }
+
+      return { success: false, message: message || "Respuesta inesperada." };
+    } catch (error) {
+      console.error("Error en sincronización manual:", error);
+      const errMsg =
+        error.response?.data?.message || "No se pudo conectar con el servidor.";
+      return { success: false, message: errMsg };
+    } finally {
+      setSyncing(false);
+    }
   };
 
   return {
     employees,
     history,
     branches,
-    departments,
     loading,
+    syncing,
     fetchData,
-    saveEmployee,
+    syncEmployees,
   };
 };

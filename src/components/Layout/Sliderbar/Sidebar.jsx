@@ -56,14 +56,9 @@ const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
 
         {isAdmin && (
           <>
-            <Link to="/users" className="nav-item">
-              <Users size={22} />
-              {!collapsed && <span>Usuarios Sistema</span>}
-            </Link>
-
             <Link to="/new-employees" className="nav-item">
               <UserCheck size={22} />
-              {!collapsed && <span>Registro de Ingresos</span>}
+              {!collapsed && <span>Nuevos Ingresos</span>}
             </Link>
 
             <Link to="/settings" className="nav-item">
@@ -74,6 +69,11 @@ const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
             <Link to="/settings/new-employees" className="nav-item">
               <BriefcaseBusiness size={22} />
               {!collapsed && <span>Correos de Ingreso</span>}
+            </Link>
+
+            <Link to="/users" className="nav-item">
+              <Users size={22} />
+              {!collapsed && <span>Usuarios Sistema</span>}
             </Link>
           </>
         )}

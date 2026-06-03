@@ -10,7 +10,6 @@ import Login from "./pages/Login/Login";
 import UserPage from "./pages/UserPage/UserPage";
 
 function App() {
-  // Corrección: Recuperar el estado inicial directamente de localStorage
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
@@ -57,7 +56,6 @@ function App() {
         }
       />
 
-      {/* Módulo de correos de Cumpleaños */}
       <Route
         path="/settings"
         element={
@@ -67,7 +65,6 @@ function App() {
         }
       />
 
-      {/* Módulo de correos de Nuevos Empleados */}
       <Route
         path="/settings/new-employees"
         element={

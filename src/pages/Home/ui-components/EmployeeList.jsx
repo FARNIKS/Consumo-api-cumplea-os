@@ -1,8 +1,7 @@
 import React from "react";
-import { genericService } from "../../../services/apiService";
 import CustomBootstrapTable from "../../../components/CustomBootstrapTable/CustomBootstrapTable";
 
-const EmployeeList = () => {
+const EmployeeList = ({ employees, isLoading }) => {
   const columns = [
     { field: "Nombre", title: "Nombre Completo", sortable: true },
     { field: "Departamento", title: "Departamento", sortable: true },
@@ -26,7 +25,8 @@ const EmployeeList = () => {
     <CustomBootstrapTable
       columns={columns}
       loadingMessage="Consultando empleados..."
-      ajaxMethod={genericService.getEmployees}
+      data={employees}
+      isLoading={isLoading}
     />
   );
 };

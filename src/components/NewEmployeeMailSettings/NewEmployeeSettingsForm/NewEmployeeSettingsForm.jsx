@@ -52,7 +52,6 @@ const NewEmployeeSettingsForm = ({
           </div>
         )}
 
-        {/* CAMPO DINÁMICO: Introducción (Input lunes, Textarea viernes) */}
         <div className="input-field">
           <label>
             {activeTab === "general"

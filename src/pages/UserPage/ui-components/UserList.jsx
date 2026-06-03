@@ -55,7 +55,6 @@ const UserList = ({ onEdit, refreshTrigger, onRefresh }) => {
           }
         }
       } else {
-        // Si el usuario cancela, obligamos al switch visual a mantener su estado real
         targetCheckbox.checked = isActive;
       }
     },

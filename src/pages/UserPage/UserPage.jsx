@@ -28,7 +28,6 @@ const UserPage = () => {
 
   return (
     <div className="dashboard-container">
-      {/* --- ENCABEZADO CORREGIDO --- */}
       <div className="dashboard-header">
         <div className="header-content-wrapper">
           <div className="dashboard-header-meta">

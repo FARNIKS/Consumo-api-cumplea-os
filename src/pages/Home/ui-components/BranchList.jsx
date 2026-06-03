@@ -1,8 +1,7 @@
 import React from "react";
-import { genericService } from "../../../services/apiService";
 import CustomBootstrapTable from "../../../components/CustomBootstrapTable/CustomBootstrapTable";
 
-const BranchList = () => {
+const BranchList = ({ branches, isLoading }) => {
   const columns = [
     { field: "code", title: "Código", align: "center", sortable: true },
     {
@@ -18,7 +17,8 @@ const BranchList = () => {
     <CustomBootstrapTable
       columns={columns}
       loadingMessage="Consultando sedes..."
-      ajaxMethod={genericService.getBranches}
+      data={branches}
+      isLoading={isLoading}
     />
   );
 };

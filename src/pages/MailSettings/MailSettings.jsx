@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
+import Swal from "sweetalert2";
+import * as apiService from "../../services/apiService";
 import { useMailSettings } from "../../hooks/useMailSettings";
 import { useMailPause } from "../../hooks/useMailPause";
 import SettingsForm from "../../components/MailSettings/SettingsForm/SettingsForm";
 import MailPreview from "../../components/MailSettings/MailPreview/MailPreview";
 import ManualSendButton from "../../components/ManualSendButton/ManualSendButton";
-import Swal from "sweetalert2";
 import "./MailSettings.css";
 
 const MailSettings = () => {
@@ -18,6 +19,8 @@ const MailSettings = () => {
     handleReset,
   } = useMailSettings();
 
+  const [isProcessingManual, setIsProcessingManual] = useState(false);
+
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const isAdmin = currentUser?.role === "admin";
 
@@ -26,6 +29,48 @@ const MailSettings = () => {
   const protectedSave = () => {
     handleUpdate();
   };
+
+  const handleManualSendWithCheck = useCallback(async () => {
+    const result = await Swal.fire({
+      title: "¿Confirmar envío masivo?",
+      text: "Se procesarán y enviarán los correos de felicitación de cumpleaños a toda la empresa correspondientes al día de hoy. ¿Deseas continuar?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#1e3a8a",
+      cancelButtonColor: "#ef4444",
+      confirmButtonText: "Sí, enviar comunicados",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true,
+    });
+
+    if (!result.isConfirmed) {
+      return;
+    }
+
+    try {
+      setIsProcessingManual(true);
+
+      await apiService.genericService.runManualBirthdaySend();
+
+      Swal.fire({
+        icon: "success",
+        title: "Envío completado",
+        text: "Los comunicados de cumpleaños han sido procesados y enviados con éxito.",
+        timer: 2500,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error("Error durante el envío manual de cumpleaños:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error de procesamiento",
+        text: "No se pudo completar el envío de correos. Inténtalo de nuevo más tarde o revisa los logs del servidor.",
+        confirmButtonColor: "#1e3a8a",
+      });
+    } finally {
+      setIsProcessingManual(false);
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -48,7 +93,12 @@ const MailSettings = () => {
           </div>
 
           <div className="header-actions-group">
-            {isAdmin && <ManualSendButton />}
+            {isAdmin && (
+              <ManualSendButton
+                onClick={handleManualSendWithCheck}
+                isProcessing={isProcessingManual}
+              />
+            )}
 
             <div
               className={`status-control-card ${isPaused ? "is-paused" : "is-active"}`}

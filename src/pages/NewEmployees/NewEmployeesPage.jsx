@@ -1,51 +1,98 @@
 import React, { useState, useEffect } from "react";
 import { useNewEmployeeManagement } from "../../hooks/useNewEmployeeManagement";
-import EmployeeFormModal from "../../components/NewEmployees/EmployeeFormModal";
 import EmployeeList from "./uicomponents/EmployeeList";
 import HistoryList from "./uicomponents/HistoryList";
+import Swal from "sweetalert2";
 import "./NewEmployeesPage.css";
 
 const NewEmployeesPage = () => {
   const [activeTab, setActiveTab] = useState("pending");
-  const [showModal, setShowModal] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const {
-    branches,
-    departments,
-    employees,
-    history,
-    fetchData,
-    saveEmployee,
-    loading,
-  } = useNewEmployeeManagement();
+  const { employees, history, fetchData, syncEmployees, loading, syncing } =
+    useNewEmployeeManagement();
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
-  const handleOpenModal = (employee = null) => {
-    setSelectedEmployee(employee);
-    setShowModal(true);
+  const handleSyncClick = async () => {
+    const cuestionario = await Swal.fire({
+      title: "¿Deseas iniciar la sincronización?",
+      text: "El sistema consultará los nuevos ingresos registrados en AX durante la última semana. Este proceso puede tardar unos segundos debido a la conexión de red.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#1e3a8a",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Sí, sincronizar ahora",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true,
+    });
+
+    if (!cuestionario.isConfirmed) {
+      return;
+    }
+
+    const result = await syncEmployees();
+
+    if (result.success) {
+      const match = result.output.match(/Se añadieron (\d+) empleados/);
+      const cantidadAnadidos = match ? parseInt(match[1], 10) : 0;
+
+      if (cantidadAnadidos === 0) {
+        Swal.fire({
+          title: "Sincronización Completada",
+          text: "No se registran nuevos ingresos en el sistema.",
+          icon: "info",
+          confirmButtonColor: "#1e3a8a",
+          confirmButtonText: "Entendido",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Sincronización Exitosa!",
+          text: `Se lograron registrar ${cantidadAnadidos} nuevos empleados en la sala de espera.`,
+          icon: "success",
+          confirmButtonColor: "#1e3a8a",
+          confirmButtonText: "Excelente",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Error de Sincronización",
+        text: result.message,
+        icon: "error",
+        confirmButtonColor: "#ef4444",
+        confirmButtonText: "Cerrar",
+      });
+    }
   };
 
   return (
     <div className="dashboard-container">
-      {/* --- ENCABEZADO CORREGIDO --- */}
       <div className="dashboard-header">
         <div className="header-content-wrapper">
           <div className="dashboard-header-meta">
             <h2 className="dashboard-title">Gestión de Nuevos Ingresos</h2>
             <p className="dashboard-subtitle">
-              Administration de ingresos y registros históricos
+              Administración de ingresos y registros históricos vinculados con
+              AX
             </p>
           </div>
           <div className="header-actions-group">
             <button
-              className="btn-register-custom"
-              onClick={() => handleOpenModal()}
+              className="btn-sync-custom"
+              onClick={handleSyncClick}
+              disabled={syncing || loading}
             >
-              + Nuevo Registro
+              {syncing ? (
+                <span className="sync-btn-content">
+                  <span className="spinner-sync"></span>
+                  Sincronizando...
+                </span>
+              ) : (
+                <span className="sync-btn-content">
+                  <i className="bi bi-arrow-repeat"></i> Sincronizar Ahora
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -68,30 +115,15 @@ const NewEmployeesPage = () => {
             </button>
           </div>
 
-          <div className="tab-panel-container" style={{ marginTop: "20px" }}>
+          <div className="tab-panel-container">
             {activeTab === "pending" ? (
-              <EmployeeList
-                employees={employees || []}
-                onEdit={handleOpenModal}
-                isLoading={loading}
-              />
+              <EmployeeList employees={employees || []} isLoading={loading} />
             ) : (
               <HistoryList history={history || []} isLoading={loading} />
             )}
           </div>
         </div>
       </div>
-
-      {showModal && (
-        <EmployeeFormModal
-          employee={selectedEmployee}
-          branches={branches}
-          departments={departments}
-          onClose={() => setShowModal(false)}
-          onSave={saveEmployee}
-          onRefresh={fetchData}
-        />
-      )}
     </div>
   );
 };

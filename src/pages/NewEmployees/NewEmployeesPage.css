@@ -1,4 +1,4 @@
-.btn-register-custom {
+.btn-sync-custom {
   background-color: #1e3a8a;
   color: white;
   padding: 10px 18px;
@@ -10,14 +10,48 @@
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-register-custom:hover {
+.btn-sync-custom:hover:not(:disabled) {
   background-color: #1e40af;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
 }
 
+.btn-sync-custom:disabled {
+  background-color: #64748b;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.sync-btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sync-btn-content i {
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.spinner-sync {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin-custom 0.8s linear infinite;
+}
+
+@keyframes spin-custom {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 600px) {
-  .btn-register-custom {
+  .btn-sync-custom {
     width: 100%;
     padding: 12px;
     font-size: 0.95rem;
