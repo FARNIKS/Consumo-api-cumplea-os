@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Configuración Específica para el Visor de PDF (Manual de Usuario)
+   ========================================================================== */
+
+/* Limpia paddings del contenedor global para que el PDF llegue hasta los bordes */
+.pdf-card-container {
+  padding: 0 !important;
+}
+
+/* Envoltura con cálculo de altura dinámica basada en el viewport */
+.pdf-viewer-wrapper {
+  width: 100%;
+  /* Resta la altura estimada del Header + paddings del contenedor */
+  height: calc(100vh - 210px);
+  min-height: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajuste para que el tag <object> o <iframe> use el 100% real */
+.pdf-object-fallback {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Fallback elegante si el navegador no renderiza PDFs nativamente */
+.pdf-error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #4b5563; /* Gris intermedio coincidiendo con tu subtítulo */
+  gap: 12px;
+  animation: dashboardFadeIn 0.4s ease-out;
+}
+
+.pdf-error-message h3 {
+  color: #111827; /* Mismo color de tus títulos principales */
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+.pdf-error-message p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  max-width: 450px;
+  margin: 0 0 8px 0;
+  line-height: 1.5;
+}
+
+/* Ajuste responsivo para pantallas pequeñas */
+@media (max-width: 600px) {
+  .pdf-viewer-wrapper {
+    /* Da un poco más de aire en móviles ajustando la altura */
+    height: calc(100vh - 180px);
+    min-height: 450px;
+  }
+
+  .pdf-error-message h3 {
+    font-size: 1.15rem;
+  }
+}

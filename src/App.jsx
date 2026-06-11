@@ -8,6 +8,7 @@ import Settings from "./pages/MailSettings/MailSettings";
 import NewEmployeeMailSettings from "./pages/NewEmployeeMailSettings/NewEmployeeMailSettings";
 import Login from "./pages/Login/Login";
 import UserPage from "./pages/UserPage/UserPage";
+import HelpPage from "./pages/HelpPage/HelpPage";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -70,6 +71,15 @@ function App() {
         element={
           <Layout user={user}>
             <NewEmployeeMailSettings />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/ayuda"
+        element={
+          <Layout user={user}>
+            <HelpPage />
           </Layout>
         }
       />

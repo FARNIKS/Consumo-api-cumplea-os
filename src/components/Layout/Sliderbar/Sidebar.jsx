@@ -9,6 +9,7 @@ import {
   Users,
   UserCheck,
   BriefcaseBusiness,
+  CircleHelp, // 👈 Importamos el ícono de ayuda
 } from "lucide-react";
 import { useAuthUser } from "../../../hooks/useAuthUser.js";
 import "./Sidebar.css";
@@ -77,6 +78,11 @@ const Sidebar = ({ collapsed, setCollapsed, onLogout }) => {
             </Link>
           </>
         )}
+
+        <Link to="/ayuda" className="nav-item">
+          <CircleHelp size={22} />
+          {!collapsed && <span>Ayuda</span>}
+        </Link>
       </nav>
 
       <div className="sidebar-user">
